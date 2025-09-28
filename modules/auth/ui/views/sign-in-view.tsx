@@ -1,0 +1,161 @@
+'use client'
+
+import Link from 'next/link'
+
+import { EyeIcon, EyeOffIcon, OctagonAlertIcon } from 'lucide-react'
+
+import { useForm } from 'react-hook-form'
+
+import { cn } from '@/lib/utils'
+
+import { Alert, AlertTitle } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+
+// todo: integrar schema de validación con Zod
+
+const SignInView = () => {
+  // todo: integrar con React Hook Form
+
+  const form = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  })
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
+  return (
+    <div className='flex flex-col gap-6'>
+      <Card className='overflow-hidden p-0'>
+        <CardContent className='grid p-0 lg:grid-cols-2'>
+          <Form {...form}>
+            <form className='p-6 lg:p-8' onSubmit={form.handleSubmit(onSubmit)}>
+              <div className='flex flex-col gap-6'>
+                <div className='flex flex-col gap-y-2'>
+                  <h1 className='text-3xl font-bold'>Bienvenido de nuevo</h1>
+                  <p className='text-muted-foreground text-sm font-medium text-balance md:text-xs'>
+                    Inicia sesión en tu cuenta
+                  </p>
+                </div>
+
+                <div className='grid gap-3'>
+                  <FormField
+                    control={form.control}
+                    name='email'
+                    render={({ field }) => (
+                      <FormItem className='grid gap-3'>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            autoFocus
+                            type='email'
+                            placeholder='m@example.com'
+                            {...field}
+                          />
+                        </FormControl>
+
+                        {/* todo: Mostrar mensajes de error para credenciales incorrectas */}
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className='grid gap-3'>
+                  <FormField
+                    control={form.control}
+                    name='password'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <div className='relative'>
+                            <Input
+                              type={true ? 'text' : 'password'}
+                              placeholder='********'
+                              className='pr-10'
+                              {...field}
+                            />
+                            <Button
+                              type='button'
+                              variant='ghost'
+                              size='sm'
+                              className='absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent'
+                              onClick={() => {}}
+                              aria-label={
+                                true ? 'Hide password' : 'Show password'
+                              }
+                            >
+                              {true ? (
+                                <EyeOffIcon className='h-4 w-4' />
+                              ) : (
+                                <EyeIcon className='h-4 w-4' />
+                              )}
+                            </Button>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {!!true && (
+                  <Alert
+                    variant='destructive'
+                    className='bg-destructive/10 border-none text-sm'
+                  >
+                    <OctagonAlertIcon className='h-4 w-4' />
+                    <AlertTitle>{true}</AlertTitle>
+                  </Alert>
+                )}
+
+                <Button
+                  type='submit'
+                  className='w-full bg-orange-400 hover:bg-orange-400/90'
+                  disabled={true}
+                >
+                  {true ? 'Iniciando sesión...' : 'Iniciar sesión'}
+                </Button>
+
+                <div className='text-center text-sm'>
+                  <p className='text-muted-foreground'>
+                    ¿No tienes una cuenta?{' '}
+                    <Link
+                      href='/sign-up'
+                      className={cn(
+                        'font-medium text-orange-600',
+                        true && 'pointer-events-none'
+                      )}
+                    >
+                      Regístrate
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </form>
+          </Form>
+
+          <div className='relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-orange-50 to-orange-500 lg:flex'>
+            <p className='text-2xl font-semibold text-black'>dumi</p>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+export { SignInView }
