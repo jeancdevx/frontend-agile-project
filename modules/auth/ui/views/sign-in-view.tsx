@@ -1,10 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
+import { useState } from 'react'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { EyeIcon, EyeOffIcon, OctagonAlertIcon } from 'lucide-react'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 import { cn } from '@/lib/utils'
 
@@ -21,20 +27,25 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-// todo: integrar schema de validación con Zod
+import { signInFormSchema } from '../schemas'
 
 const SignInView = () => {
-  // todo: integrar con React Hook Form
+  const router = useRouter()
 
-  const form = useForm({
+  // todo: usar estos estados para manejar la UI
+  const [error, setError] = useState<string | null>(null)
+  const [pending, setPending] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+
+  const form = useForm<z.infer<typeof signInFormSchema>>({
+    resolver: zodResolver(signInFormSchema),
     defaultValues: {
       email: '',
       password: ''
     }
   })
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: z.infer<typeof signInFormSchema>) => {
     console.log(data)
   }
 
