@@ -18,19 +18,18 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import { clienteSchema, FormValues } from '../../schemas'
+import { CustomerFormValues, customerSchema } from '../../schemas'
 
-interface ClientesFormProps {
-  // initialValues?: AgentGetOne
+interface CustomerFormProps {
   onSuccess?: () => void
   onCancel?: () => void
 }
 
-const ClientesForm = ({ onSuccess, onCancel }: ClientesFormProps) => {
+const CustomerForm = ({ onSuccess, onCancel }: CustomerFormProps) => {
   const [isPending, setIsPending] = useState(false)
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(clienteSchema),
+  const form = useForm<CustomerFormValues>({
+    resolver: zodResolver(customerSchema),
     defaultValues: {
       nombres: '',
       apellidos: '',
@@ -39,7 +38,7 @@ const ClientesForm = ({ onSuccess, onCancel }: ClientesFormProps) => {
     }
   })
 
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (values: CustomerFormValues) => {
     console.log(values)
   }
 
@@ -131,4 +130,4 @@ const ClientesForm = ({ onSuccess, onCancel }: ClientesFormProps) => {
   )
 }
 
-export default ClientesForm
+export default CustomerForm
