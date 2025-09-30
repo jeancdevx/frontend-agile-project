@@ -10,7 +10,6 @@ import { EyeIcon, EyeOffIcon, OctagonAlertIcon } from 'lucide-react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { cn } from '@/lib/utils'
 
@@ -20,6 +19,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,7 +27,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import { signInFormSchema } from '../schemas'
+import { signInFormSchema, SignInFormValues } from '../schemas'
 
 const SignInView = () => {
   const router = useRouter()
@@ -36,7 +36,7 @@ const SignInView = () => {
   const [pending, setPending] = useState<boolean>(false)
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
-  const form = useForm<z.infer<typeof signInFormSchema>>({
+  const form = useForm<SignInFormValues>({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {
       email: '',
@@ -44,21 +44,22 @@ const SignInView = () => {
     }
   })
 
-  const onSubmit = (data: z.infer<typeof signInFormSchema>) => {
+  const onSubmit = (data: SignInFormValues) => {
     console.log(data)
   }
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex w-full flex-col gap-6'>
       <Card className='overflow-hidden p-0'>
         <CardContent className='grid p-0 lg:grid-cols-2'>
           <Form {...form}>
             <form className='p-6 lg:p-8' onSubmit={form.handleSubmit(onSubmit)}>
               <div className='flex flex-col gap-6'>
-                <div className='flex flex-col gap-y-2'>
+                <div className='flex flex-col gap-y-2 text-center'>
                   <h1 className='text-3xl font-bold'>Bienvenido de nuevo</h1>
-                  <p className='text-muted-foreground text-sm font-medium text-balance md:text-xs'>
-                    Inicia sesión en tu cuenta
+                  <p className='text-muted-foreground text-sm font-medium text-balance'>
+                    Inicia sesión en tu cuenta y comienza a explorar dentro del
+                    catalogo de dumi
                   </p>
                 </div>
 
@@ -69,6 +70,7 @@ const SignInView = () => {
                     render={({ field }) => (
                       <FormItem className='grid gap-3'>
                         <FormLabel>Email</FormLabel>
+
                         <FormControl>
                           <Input
                             autoFocus
@@ -90,7 +92,8 @@ const SignInView = () => {
                     name='password'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Contraseña</FormLabel>
+
                         <FormControl>
                           <div className='relative'>
                             <Input
@@ -117,7 +120,13 @@ const SignInView = () => {
                             </Button>
                           </div>
                         </FormControl>
+
                         <FormMessage />
+
+                        <FormDescription>
+                          Asegurate de que tu contraseña tenga al menos 8
+                          caracteres.
+                        </FormDescription>
                       </FormItem>
                     )}
                   />
@@ -147,7 +156,7 @@ const SignInView = () => {
                     <Link
                       href='/sign-up'
                       className={cn(
-                        'font-medium text-orange-600',
+                        'font-semibold text-orange-600',
                         pending && 'pointer-events-none'
                       )}
                     >
@@ -164,6 +173,13 @@ const SignInView = () => {
           </div>
         </CardContent>
       </Card>
+
+      <div className='text-muted-foreground text-center text-xs font-medium text-balance [&_a]:hover:text-orange-500'>
+        <p>Presionando &quot;Iniciar sesión&quot;, aceptas nuestros</p>
+        <a href='#'>Términos y condiciones</a>
+        <span> y </span>
+        <a href='#'>Política de privacidad</a>
+      </div>
     </div>
   )
 }
