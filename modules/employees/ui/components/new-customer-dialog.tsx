@@ -2,7 +2,7 @@
 
 import ResponsiveDialog from '@/components/responsive-dialog'
 
-import ClientesForm from './clientes-form'
+import CustomerForm from './customer-form'
 
 interface NewClientDialogProps {
   open: boolean
@@ -17,7 +17,7 @@ const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) => {
       open={open}
       onOpenChange={onOpenChange}
     >
-      <ClientesForm
+      <CustomerForm
         onSuccess={() => onOpenChange(false)}
         onCancel={() => onOpenChange(false)}
       />

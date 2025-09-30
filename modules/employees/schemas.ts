@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const phoneRegex = /^\+?51\d{9}$|^9\d{8}$/
 
-export const clienteSchema = z.object({
+export const customerSchema = z.object({
   nombres: z.string().min(1, 'Nombres es requerido'),
   apellidos: z.string().min(1, 'Apellidos es requerido'),
   referido: z.string().optional(),
@@ -12,4 +12,4 @@ export const clienteSchema = z.object({
     .regex(phoneRegex, 'Teléfono no válido (ej: +51987654321 o 987654321)')
 })
 
-export type FormValues = z.infer<typeof clienteSchema>
+export type CustomerFormValues = z.infer<typeof customerSchema>

@@ -39,8 +39,10 @@ const ResponsiveDialog = ({
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>{title}</DrawerTitle>
-            <DrawerDescription>{description}</DrawerDescription>
+            <DrawerTitle className='text-center'>{title}</DrawerTitle>
+            <DrawerDescription className='text-center'>
+              {description}
+            </DrawerDescription>
           </DrawerHeader>
 
           <div className='p-4'>{children}</div>
@@ -53,8 +55,10 @@ const ResponsiveDialog = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogTitle className='text-center'>{title}</DialogTitle>
+          <DialogDescription className='text-center'>
+            {description}
+          </DialogDescription>
         </DialogHeader>
 
         {children}

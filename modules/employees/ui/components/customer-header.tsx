@@ -6,9 +6,9 @@ import { PlusIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
-import NewClientDialog from './new-client-dialog'
+import NewClientDialog from './new-customer-dialog'
 
-const VendedorClientesHeader = () => {
+const CustomerHeader = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   return (
@@ -31,4 +31,4 @@ const VendedorClientesHeader = () => {
   )
 }
 
-export default VendedorClientesHeader
+export default CustomerHeader
