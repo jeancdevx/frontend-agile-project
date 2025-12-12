@@ -6,7 +6,7 @@ import { PlusIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
-import NewClientDialog from './new-customer-dialog'
+import { NewClientDialog } from './new-customer-dialog'
 
 const CustomerHeader = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
