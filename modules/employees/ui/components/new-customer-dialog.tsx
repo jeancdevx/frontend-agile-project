@@ -25,4 +25,4 @@ const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) => {
   )
 }
 
-export default NewClientDialog
+export { NewClientDialog }
